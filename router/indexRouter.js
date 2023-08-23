@@ -1,9 +1,12 @@
-import router from "express";
+import { Router } from "express";
+import citiesRouter from "./citiesRouter.js";
 
-const indexRouter = router()
+const indexRouter = Router()
 
-indexRouter.get('/', (request, response, next) => {
-    response.send('Bienvenido a mi servidor en /api')
+indexRouter.get('/', (req, res, next) => {
+    res.send('Bienvenido a mi servidor en /api')
 })
+
+indexRouter.use('/cities', citiesRouter)
 
 export default indexRouter
