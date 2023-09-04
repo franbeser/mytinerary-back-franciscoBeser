@@ -110,6 +110,6 @@ let cities = [
     },
 ]
 
-City.insertMany(cities);
+// City.insertMany(cities);
 
-// export default cities
+export default cities

@@ -1,7 +1,6 @@
 import City from '../Models/City.js';
-// import cities from '../Models/data/cities.js';
+import cities from '../Models/data/cities.js';
 const citiesController = {
-
 
     getAllCities: async (req, res, next) => {
         let cities;
@@ -41,28 +40,28 @@ const citiesController = {
             error
         })
     },
-    getOneCity: async (req, res, next) => {
+    // getOneCity: async (req, res, next) => {
 
-        console.log(req.params)
-        const { id } = req.params
-        let cities;
-        let error = null
-        let success = true;
+    //     console.log(req.params)
+    //     const { id } = req.params
+    //     let cities;
+    //     let error = null
+    //     let success = true;
 
-        try {
-            cities = await city.findOne({ _id: id })
-        } catch (err) {
-            console.log(err)
-            success = false;
-            error = err
-        }
+    //     try {
+    //         cities = await city.findOne({ _id: id }).populate("itineraries")
+    //     } catch (err) {
+    //         console.log(err)
+    //         success = false;
+    //         error = err
+    //     }
 
-        res.json({
-            response: cities,
-            success,
-            error
-        })
-    },
+    //     res.json({
+    //         response: cities,
+    //         success,
+    //         error
+    //     })
+    // },
 
     updateOneCity: async (req, res, next) => {
         const { id } = req.params
@@ -106,13 +105,13 @@ const citiesController = {
 
     },
 
-    getACity: (req, res, netx) => {
-        const city = City.find(city => city.name == req.params.var )
-        res.json({
-            info: city,
-            success: true,
-            error: null
-        })
+    getOneCity: async ( req, res) => {
+        try {
+            const city = await City.findById( req.params.id ).populate("itineraries")
+            res.status(200).json( { city } )
+        } catch (error) {
+            res.status(500).json( error )
+        }
     }
 
 
