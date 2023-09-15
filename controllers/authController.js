@@ -76,11 +76,11 @@ const authController = {
                 throw new Error( "The email/password is incorrect" )
             }
 
-            let { email, photo, age } = userInDB
-            const token = jwt.sign( { email, photo }, process.env.TOK_KEY, { expiresIn:'1h' } )
+            let { email, photo, name } = userInDB
+            const token = jwt.sign( { email, photo, name }, process.env.TOK_KEY, { expiresIn:'1h' } )
             return res.status(200).json({
                 success: true,
-                userData: { email, photo},
+                userData: { email, photo, name},
                 token: token,
                 message: 'Sign in successfully'
             })
